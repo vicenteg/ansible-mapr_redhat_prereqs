@@ -7,3 +7,10 @@ mapr_user_pw: '$1$yoPLWBQ6$6fvQchDTBu3Ccs3PVURpA.'
 mapr_uid: 2147483632
 mapr_gid: 2147483632
 mapr_home: /home/mapr
+
+mirror_host: package.mapr.com
+mapr_version: v4.0.2
+
+proxy_env:
+  http_proxy:
+  https_proxy:
