@@ -11,6 +11,4 @@ mapr_home: /home/mapr
 mirror_host: package.mapr.com
 mapr_version: v4.0.2
 
-proxy_env:
-  http_proxy:
-  https_proxy:
+proxy_env: { }
