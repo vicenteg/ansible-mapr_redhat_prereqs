@@ -44,14 +44,6 @@
     - java-1.7.0-openjdk
     - java-1.7.0-openjdk-devel
 
-- name: install NTP
-  yum: name=ntp state=present
-  environment: proxy_env
-  notify: restart ntp
-
-- name: ensure NTP is enabled
-  service: name=ntpd enabled=yes state=started
-
 - name: install nfs-utils to get rpcbind
   environment: proxy_env
   yum: name=nfs-utils state=installed
