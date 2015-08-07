@@ -30,6 +30,7 @@
 
 - name: disable iptables
   service: name=iptables state=stopped enabled=no
+  when: ansible_distribution_major_version < "7"
 
 - name: write /etc/hosts with cluster node names
   template: src=hosts.j2 dest=/etc/hosts mode=0644 
@@ -65,7 +66,7 @@
 - name: install the MapR GPG key
   tags:
     - external
-  command: rpm --import http://package.mapr.com/releases/pub/maprgpg.key
+  rpm_key: state=present key=http://{{mirror_host}}/releases/pub/maprgpg.key
   environment: proxy_env
 
 - name: save the current list of installed packages after prereqs
