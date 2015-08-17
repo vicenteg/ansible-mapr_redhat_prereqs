@@ -21,5 +21,12 @@ baseurl=http://{{mirror_host}}/releases/ecosystem/redhat/
 baseurl="Your configuration is broken. Make sure mapr_version starts with either v3, v4, or v5.
 {% endif %}
 enabled=1
-gpgcheck=0
+gpgcheck=1
+protect=1
+
+[maprpatch]
+name=MapR Patches
+baseurl=http://{{mirror_host}}/patches/releases/{{mapr_version}}/redhat/
+enabled=1
+gpgcheck=1
 protect=1
