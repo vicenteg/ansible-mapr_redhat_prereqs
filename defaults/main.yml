@@ -9,6 +9,8 @@ mapr_gid: 2147483632
 mapr_home: /home/mapr
 
 mirror_host: package.mapr.com
-mapr_version: v4.0.2
+mapr_version: v5.0.0
+gpgcheck: 1
+beta: False
 
 proxy_env: { }
