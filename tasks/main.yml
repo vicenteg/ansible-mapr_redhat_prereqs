@@ -96,6 +96,7 @@
   sudo: yes
   sudo_user: root
   environment: proxy_env
+  when: gpgcheck == 1
 
 - name: save the current list of installed packages after prereqs
   shell: rpm -qa --queryformat '%{NAME}\t%{VERSION}\n' > packages_after_prereqs
