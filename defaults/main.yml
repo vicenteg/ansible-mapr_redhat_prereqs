@@ -1,6 +1,9 @@
 ---
 # defaults file for mapr-rh-prereqs
 
+core_top_level_dirs: [ "releases" ]
+ecosystem_top_level_dirs: [ "releases" ]
+
 # Password generated with openssl passwd -1
 mapr_user_pw: '$1$yoPLWBQ6$6fvQchDTBu3Ccs3PVURpA.'
 
