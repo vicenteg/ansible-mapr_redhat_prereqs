@@ -5,6 +5,11 @@
   args:
     creates: packages_before_prereqs
 
+- name: configure proxy for yum
+  sudo_user: root
+  lineinfile: dest=/etc/yum.conf line=proxy={{proxy_env.http_proxy}} regexp=^proxy backup=yes
+  when: proxy_env.http_proxy is defined
+
 - name: test external url
   get_url: url=http://example.com dest=/dev/null 
   environment: proxy_env
