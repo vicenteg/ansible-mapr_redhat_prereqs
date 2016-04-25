@@ -9,7 +9,7 @@ ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
 {% for host in groups['all'] %}
   {%- if host in hostvars -%}
-{{hostvars[host].ansible_eth0.ipv4.address}} {{hostvars[host].ansible_hostname}} {{hostvars[host].ansible_fqdn}}
+{{hostvars[host].ansible_eth0.ipv4.address}} {{hostvars[host].ansible_fqdn}} {{hostvars[host].ansible_hostname}}
   {%- endif %}
 
 {% endfor %}
