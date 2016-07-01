@@ -2,9 +2,11 @@
 # handlers file for mapr-rh-prereqs
 
 - name: restart ntp
-  sudo_user: root
+  become: yes
+  become_user: root
   service: name=ntpd state=restarted
 
 - name: reload sysctl
-  sudo_user: root
+  become: yes
+  become_user: root
   command: sysctl -e -p

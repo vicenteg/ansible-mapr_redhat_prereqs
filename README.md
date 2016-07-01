@@ -46,7 +46,7 @@ Example Playbook
 
 - hosts: CentOS;RedHat
   max_fail_percentage: 0
-  sudo: yes
+  become: yes
   roles:
     - mapr-redhat-prereqs
 
