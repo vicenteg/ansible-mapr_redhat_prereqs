@@ -13,13 +13,13 @@
 
 - name: test external url
   get_url: url=http://example.com dest=/dev/null 
-  environment: proxy_env
+  environment: '{{proxy_env}}'
 
 - name: install libselinux-python tools
   yum: name="{{item}}" state=present
   become: yes
   become_user: root
-  environment: proxy_env
+  environment: '{{proxy_env}}'
   with_items:
     - libselinux-python
 
@@ -27,7 +27,7 @@
   yum: name=http://centos.aol.com/6/os/x86_64/Packages/sdparm-1.04-1.1.el6.x86_64.rpm state=present
   become: yes
   become_user: root
-  environment: proxy_env
+  environment: '{{proxy_env}}'
   when: ansible_distribution == 'Amazon'
 
 - name: set selinux config to permissive
@@ -62,13 +62,13 @@
   yum: name={{item}} state=present
   become: yes
   become_user: root
-  environment: proxy_env
+  environment: '{{proxy_env}}'
   with_items:
     - java-1.7.0-openjdk
     - java-1.7.0-openjdk-devel
 
 - name: install nfs-utils to get rpcbind
-  environment: proxy_env
+  environment: '{{proxy_env}}'
   yum: name=nfs-utils state=installed
   become: yes
   become_user: root
@@ -101,7 +101,7 @@
   rpm_key: state=present key=http://{{mirror_host}}/releases/pub/maprgpg.key
   become: yes
   become_user: root
-  environment: proxy_env
+  environment: '{{proxy_env}}'
   when: gpgcheck == 1
 
 - name: save the current list of installed packages after prereqs
