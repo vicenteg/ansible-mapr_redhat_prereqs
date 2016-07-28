@@ -58,14 +58,14 @@
   become_user: root
   template: src=maprtech.repo.j2 dest=/etc/yum.repos.d/maprtech.repo mode=0644 owner=root group=root
 
-- name: install Java 1.7
+- name: install Java 1.8
   yum: name={{item}} state=present
   become: yes
   become_user: root
   environment: '{{proxy_env}}'
   with_items:
-    - java-1.7.0-openjdk
-    - java-1.7.0-openjdk-devel
+    - java-1.8.0-openjdk
+    - java-1.8.0-openjdk-devel
 
 - name: install nfs-utils to get rpcbind
   environment: '{{proxy_env}}'
