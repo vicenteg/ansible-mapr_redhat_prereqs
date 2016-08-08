@@ -12,7 +12,7 @@
   when: proxy_env.http_proxy is defined
 
 - name: test external url
-  get_url: url=http://example.com dest=/dev/null 
+  get_url: url=http://example.com force=yes dest=/dev/null
   environment: '{{proxy_env}}'
 
 - name: install libselinux-python tools
@@ -53,10 +53,28 @@
   become_user: root
   template: src=hosts.j2 dest=/etc/hosts mode=0644 
 
+- name: test patch repo
+  get_url: url=http://package.mapr.com/patches/releases/{{mapr_version}}/redhat/repodata/repomd.xml dest=/dev/null force=yes
+  environment: '{{proxy_env}}'
+  ignore_errors: yes
+  register: check_for_patch_repo
+
 - name: install repo for RedHat-based Linux
   become: yes
   become_user: root
   template: src=maprtech.repo.j2 dest=/etc/yum.repos.d/maprtech.repo mode=0644 owner=root group=root
+
+- name: install patch repo
+  become: yes
+  become_user: root
+  template: src=maprtech_patch.repo.j2 dest=/etc/yum.repos.d/maprtech_patch.repo mode=0644 owner=root group=root
+  when: check_for_patch_repo|succeeded
+
+- name: remove patch repo
+  become: yes
+  become_user: root
+  file: dest=/etc/yum.repos.d/maprtech_patch.repo state=absent
+  when: check_for_patch_repo|failed
 
 - name: install Java 1.8
   yum: name={{item}} state=present

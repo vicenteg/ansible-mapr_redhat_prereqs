@@ -8,7 +8,8 @@ ecosystem_top_level_dirs: [ "releases" ]
 mapr_user_pw: '$1$yoPLWBQ6$6fvQchDTBu3Ccs3PVURpA.'
 
 mirror_host: package.mapr.com
-mapr_version: v5.1.0
+mapr_version: v5.2.0
+mep_version: 1.0.0
 gpgcheck: 1
 beta: False
 

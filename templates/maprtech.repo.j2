@@ -9,16 +9,18 @@ gpgcheck={{gpgcheck}}
 {% endif %}
 protect=1
 
+{% if mapr_version | regex_replace('^v', '') | version_compare('5.2', '<=') %}
 [maprecosystem]
 name=MapR Ecosystem
 baseurl=http://{{mirror_host}}/{{ecosystem_top_level_dirs|join('/')}}{% if ecosystem_top_level_dirs|length > 0 %}/{% endif %}ecosystem{% if mapr_version.startswith('v4') %}-4.x{% elif mapr_version.startswith('v5') %}-5.x{% endif %}/redhat/
 enabled=1
 gpgcheck=0
 protect=1
-
-[maprpatch]
-name=MapR Patches
-baseurl=http://package.mapr.com/patches/releases/{{mapr_version}}/redhat/
+{% else %}
+[MEP-{{mep_version}}]
+name=MapR MEP {{mep_version}}
+baseurl=http://{{mirror_host}}/{{ecosystem_top_level_dirs|join('/')}}{% if ecosystem_top_level_dirs|length > 0 %}/{% endif %}MEP/MEP-{{mep_version}}/redhat/
 enabled=1
 gpgcheck=0
 protect=1
+{% endif %}
