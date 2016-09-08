@@ -13,13 +13,11 @@
 
 - name: test external url
   get_url: url=http://example.com force=yes dest=/dev/null
-  environment: '{{proxy_env}}'
 
 - name: install libselinux-python tools
   yum: name="{{item}}" state=present
   become: yes
   become_user: root
-  environment: '{{proxy_env}}'
   with_items:
     - libselinux-python
 
@@ -27,7 +25,6 @@
   yum: name=http://centos.aol.com/6/os/x86_64/Packages/sdparm-1.04-1.1.el6.x86_64.rpm state=present
   become: yes
   become_user: root
-  environment: '{{proxy_env}}'
   when: ansible_distribution == 'Amazon'
 
 - name: set selinux config to permissive
@@ -55,7 +52,6 @@
 
 - name: test patch repo
   get_url: url=http://package.mapr.com/patches/releases/{{mapr_version}}/redhat/repodata/repomd.xml dest=/dev/null force=yes
-  environment: '{{proxy_env}}'
   ignore_errors: yes
   register: check_for_patch_repo
 
@@ -80,14 +76,12 @@
   yum: name={{item}} state=present
   become: yes
   become_user: root
-  environment: '{{proxy_env}}'
   with_items:
     - java-1.8.0-openjdk
     - java-1.8.0-openjdk-devel
   when: use_openjdk is defined and use_openjdk
 
 - name: install nfs-utils to get rpcbind
-  environment: '{{proxy_env}}'
   yum: name=nfs-utils state=installed
   become: yes
   become_user: root
@@ -120,7 +114,6 @@
   rpm_key: state=present key=http://{{mirror_host}}/releases/pub/maprgpg.key
   become: yes
   become_user: root
-  environment: '{{proxy_env}}'
   when: gpgcheck == 1
 
 - name: save the current list of installed packages after prereqs
